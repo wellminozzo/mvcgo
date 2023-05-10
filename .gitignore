@@ -1,0 +1,12 @@
+mvcgo
+*.exe
+*.test
+*.prof
+*.out
+/bin/
+/pkg/
+*.log
+.idea/
+.vscode/
+data/
+.env
