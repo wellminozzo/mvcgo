@@ -1,8 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"os"
 
+	"github.com/gofiber/fiber/v2"
+	"github.com/wellminozzo/mvcgo/commands"
+	"github.com/wellminozzo/mvcgo/controllers"
 	"github.com/wellminozzo/mvcgo/initializers"
 )
 
@@ -12,5 +15,19 @@ func init() {
 }
 
 func main() {
-	fmt.Println("Alterado com sucesso!")
+	args := os.Args[1:]
+
+	if len(args) > 0 {
+		commands.Run()
+	} else {
+		//app fiber
+		app := fiber.New()
+
+		//rotas
+		app.Get("/", controllers.HelloIndex)
+		app.Get("/json", controllers.HelloJson)
+
+		//init
+		app.Listen(":" + os.Getenv("WEB_PORT"))
+	}
 }
